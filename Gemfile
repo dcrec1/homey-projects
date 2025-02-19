@@ -1,5 +1,7 @@
 source "https://rubygems.org"
 
+gem "dartsass-rails"
+gem 'bootstrap', '~> 5.3.3'
 gem "friendly_id", "~> 5.5.0"
 gem "rails", "~> 8.0.1"
 gem "propshaft"
@@ -13,6 +15,7 @@ gem "slim-rails"
 gem "solid_cache"
 gem "solid_queue"
 gem "solid_cable"
+gem "devise", "~> 4.9"
 gem "bootsnap", require: false
 gem "kamal", require: false
 gem "thruster", require: false
@@ -33,7 +36,3 @@ group :test do
   gem "selenium-webdriver"
   gem "shoulda-matchers", "~> 6.0"
 end
-
-gem "devise", "~> 4.9"
-
-gem "tailwindcss-rails", "~> 4.0"
