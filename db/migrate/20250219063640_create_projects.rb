@@ -4,7 +4,7 @@ class CreateProjects < ActiveRecord::Migration[8.0]
       t.references :user, null: false
       t.string :name, null: false
       t.string :slug, null: false
-      t.string :description
+      t.text :description
       t.integer :status, null: false, default: 0
 
       t.timestamps

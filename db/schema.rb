@@ -26,7 +26,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_19_063814) do
     t.integer "user_id", null: false
     t.string "name", null: false
     t.string "slug", null: false
-    t.string "description"
+    t.text "description"
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
