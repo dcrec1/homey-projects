@@ -16,7 +16,17 @@ html
     link[rel="apple-touch-icon" href="/icon.png"]
     == stylesheet_link_tag :app, "data-turbo-track": "reload"
     == javascript_importmap_tags
+    == turbo_include_tags
   body
-    p.notice = notice
-    p.alert = alert
-    == yield
+    div.container.p-4
+      - if user_signed_in?
+        nav.navbar.navbar-light.bg-light
+          == link_to 'Homey', root_path, class: 'navbar-brand'
+
+          ul.navbar-nav.ml-auto.flex-row
+            li.nav-item
+              == link_to current_user.name, edit_user_registration_path, class: 'nav-link p-2'
+            li.nav-item
+              == link_to 'Sign out', destroy_session_path(:user), data:  { turbo_method: :delete }, class: 'nav-link'
+      = flash_messages
+      == yield
