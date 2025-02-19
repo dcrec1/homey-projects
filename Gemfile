@@ -16,6 +16,7 @@ gem "solid_cache"
 gem "solid_queue"
 gem "solid_cable"
 gem "devise", "~> 4.9"
+gem "simple_form", "~> 5.3"
 gem "bootsnap", require: false
 gem "kamal", require: false
 gem "thruster", require: false
