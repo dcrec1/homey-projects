@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem 'friendly_id', '~> 5.5.0'
+gem "friendly_id", "~> 5.5.0"
 gem "rails", "~> 8.0.1"
 gem "propshaft"
 gem "sqlite3", ">= 2.1"
