@@ -8,24 +8,34 @@ h1.d-flex
 p = @project.description
 
 ul.nav.nav-tabs
-  li.nav-item.active Comments
-  li.nav-item Changes
+  li.nav-item
+    a.nav-link.active href="#" data-bs-toggle='tab' data-bs-target='#comments-tab'  Comments
+  li.nav-item
+    a.nav-link href="#" data-bs-toggle='tab' data-bs-target='#changes-tab'  History
 
-h2 Changes
+.tab-content
+  .tab-pane.fade.show.active#comments-tab role="tabpanel" tabindex=0
+    turbo-frame id="comments" class="pb-4"
+      = render partial: 'comments/comment', collection: @project.comments.includes(:user).order(:id).last(1000)
 
-table.table.table-striped
-  thead
-    tr.bg-gray-200
-      th.border.border-gray-400.px-4.py-2 Changes
-      th.border.border-gray-400.px-4.py-2 Modified By
-      th.border.border-gray-400.px-4.py-2 Date
-  tbody
-    - @project.versions.includes(:user).order(created_at: :desc).each do |version|
-      tr
-        td.border.border-gray-400.px-4.py-2
-          - version.changeset.each do |field, values|
-            p
-              strong = field.humanize
-              | : #{values[0]} → #{values[1]}
-        td.border.border-gray-400.px-4.py-2 = version.user&.name
-        td.border.border-gray-400.px-4.py-2 = l version.created_at
+    = simple_form_for @project.comments.new, url: project_comments_path(@project), html: { data: { controller: :form, action: "turbo:submit-end->form#clear" }} do |f|
+      = f.input :body, label: false, placeholder: 'Add comment', required: true
+      = f.button :submit, 'Add Comment', class: 'btn-primary'
+
+  .tab-pane.fade#changes-tab role="tabpanel" tabindex=0
+    table.table.table-striped
+      thead
+        tr.bg-gray-200
+          th.border.border-gray-400.px-4.py-2 Changes
+          th.border.border-gray-400.px-4.py-2 Modified By
+          th.border.border-gray-400.px-4.py-2 Date
+      tbody
+        - @project.versions.includes(:user).order(created_at: :desc).each do |version|
+          tr
+            td.border.border-gray-400.px-4.py-2
+              - version.changeset.each do |field, values|
+                p
+                  strong = field.humanize
+                  | : #{values[0]} → #{values[1]}
+            td.border.border-gray-400.px-4.py-2 = version.user&.name
+            td.border.border-gray-400.px-4.py-2 = l version.created_at

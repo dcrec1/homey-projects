@@ -1,0 +1,7 @@
+<% if @comment.persisted? %>
+  <turbo-stream action="append" target="comments">
+    <template>
+      <%= render "comment", comment: @comment %>
+    </template>
+  </turbo-stream>
+<% end %>

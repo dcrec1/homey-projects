@@ -40,4 +40,21 @@ RSpec.describe 'Application' do
     expect(project.reload).to have_attributes(name: 'Homey', description: 'Lightning-fast property transactions', status: 'completed', user:, slug: 'rails')
     expect(project.versions.last).to have_attributes(whodunnit: user.id.to_s, user:)
   end
+
+  it 'allows to comment a project' do
+    visit '/'
+    fill_in :user_email, with: user.email
+    fill_in :user_password, with: user.password
+    click_button 'Log in'
+    expect(page).to have_content('Signed in successfully.')
+
+    click_link project.name
+    fill_in :comment_body, with: 'Very cool!'
+    click_button 'Add Comment'
+    within "#comments" do
+      expect(page).to have_content('Very cool!')
+    end
+    created_comment = Comment.last
+    expect(created_comment).to have_attributes(project:, user:, body: 'Very cool!')
+  end
 end
