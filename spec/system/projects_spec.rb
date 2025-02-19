@@ -38,5 +38,6 @@ RSpec.describe 'Application' do
     click_button 'Update Project'
     expect(page).to have_content('Project updated with success')
     expect(project.reload).to have_attributes(name: 'Homey', description: 'Lightning-fast property transactions', status: 'completed', user:, slug: 'rails')
+    expect(project.versions.last).to have_attributes(whodunnit: user.id.to_s, user:)
   end
 end

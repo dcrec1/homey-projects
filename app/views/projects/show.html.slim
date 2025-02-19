@@ -6,3 +6,26 @@ h1.d-flex
 .badge.rounded-pill.text-bg-primary = @project.status.humanize
 
 p = @project.description
+
+ul.nav.nav-tabs
+  li.nav-item.active Comments
+  li.nav-item Changes
+
+h2 Changes
+
+table.table.table-striped
+  thead
+    tr.bg-gray-200
+      th.border.border-gray-400.px-4.py-2 Changes
+      th.border.border-gray-400.px-4.py-2 Modified By
+      th.border.border-gray-400.px-4.py-2 Date
+  tbody
+    - @project.versions.includes(:user).order(created_at: :desc).each do |version|
+      tr
+        td.border.border-gray-400.px-4.py-2
+          - version.changeset.each do |field, values|
+            p
+              strong = field.humanize
+              | : #{values[0]} → #{values[1]}
+        td.border.border-gray-400.px-4.py-2 = version.user&.name
+        td.border.border-gray-400.px-4.py-2 = l version.created_at
