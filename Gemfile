@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 gem "dartsass-rails"
-gem 'bootstrap', '~> 5.3.3'
+gem "bootstrap", "~> 5.3.3"
 gem "friendly_id", "~> 5.5.0"
 gem "rails", "~> 8.0.1"
 gem "propshaft"
