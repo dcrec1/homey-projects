@@ -1,3 +1,18 @@
-h1 Projects
+h1.d-flex
+  .me-2 Projects
+  = link_to 'New Project', new_project_path, class: 'btn btn-outline-primary my-auto'
 
-== link_to 'New Project', new_project_path, class: 'btn btn-primary'
+table.table.table-striped
+  thead
+    tr
+      th Name
+      th Description
+      th Status
+      th Created by
+  tbody
+    - @projects.includes(:user).each do |project|
+      tr
+        td = link_to project.name, project_path(project)
+        td = project.description
+        td = project.status.humanize
+        td = project.user.name

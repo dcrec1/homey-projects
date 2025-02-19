@@ -1,1 +1,8 @@
-h1 = @project.name
+h1.d-flex
+  .me-2= @project.name
+  - if @project.user == current_user
+    = link_to 'Edit', edit_project_path(@project), class: 'btn btn-outline-primary my-auto'
+
+.badge.rounded-pill.text-bg-primary = @project.status.humanize
+
+p = @project.description
