@@ -13,6 +13,7 @@ gem "importmap-rails"
 gem "turbo-rails"
 gem "stimulus-rails"
 gem "jbuilder"
+gem 'pg'
 gem "slim-rails"
 gem "solid_cache"
 gem "solid_queue"
